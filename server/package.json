@@ -1,0 +1,22 @@
+{
+  "name": "mern_heroku_api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18",
+    "morgan": "^1.9.1"
+  },
+  "description": "Small template for developing a MERN API using express.js",
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.9.0"
+  }
+}
