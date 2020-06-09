@@ -24,39 +24,12 @@ app.use(express.static(buildPath)); // Serve React from build directory
 
 // Open paths that do not need login. Any route not included here is protected!
 let openPaths = [
-    { url: '/login', methods: ['POST'] }
+    { url: '/login', methods: ['POST'] },
+    { url: '/register', method: ['POST']}
 ];
 
 const secret = process.env.SECRET || "i want a cat";
 app.use(expressJwt({ secret: secret }).unless({ path: openPaths}));
-
-// I'll mock the users for now because yes
-let users = [
-    {
-        id: 1,
-        username: 'tajsonik',
-        password: 'asdf123'
-    },
-    {
-        id: 2,
-        username: 'tajsoniktest2',
-        password: 'abc456'
-    }
-];
-
-// Creating more test data: We run through all users and add a hash of their password to each.
-// In practice, you should hash when passwords are created, not later.
-users.forEach(async user => {
-    const hashedPassword = await new Promise((resolve, reject) => {
-        bcrypt.hash(user.password, 10, function(err, hash) {
-            if (err) reject(err); else resolve(hash);
-        });
-    });
-
-    user.hash = hashedPassword; // The hash has been made, and is stored on the user object.
-    delete user.password; // Let's remove the clear text password (it shouldn't be there in the first place)
-    console.log(`Hash generated for ${user.username}:`, user); // Logging for debugging purposes
-});
 
 
 app.use((req, res, next) => {
@@ -75,6 +48,7 @@ app.use((req, res, next) => {
       next();
     }
 });
+
 /*** Database ***/
 const suggestionsDb = require('./db')(mongoose);
 
@@ -118,44 +92,19 @@ app.post('/api/suggestions/:id/signatures', async (req, res) => {
 
 });
 
-// login route
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    console.log(req.body);
-
-    if (!username || !password) {
-        let msg = "Username or password missing!";
-        console.error(msg);
-        res.status(401).json({msg: msg});
-        return;
-    }
-
-    const user = users.find((user) => user.username === username);
-        if (user) { // If the user is found
-            bcrypt.compare(password, user.hash, (err, result) => {
-                if (result) { // If the password matched
-                    const payload = { username: username };
-                    const token = jwt.sign({ username: username }, 'i want a cat', { expiresIn: '1h' });
-
-                    res.json({
-                        msg: `User '${username}' authenticated successfully`,
-                        token: token
-                    });
-                }
-                else res.status(401).json({msg: "Password mismatch!"})
-            });
-        } else {
-            res.status(404).json({msg: "User not found!"});
-        }
-});
-
-
 // "Redirect" all get requests (except for the routes specified above) to React's entry point (index.html) to be handled by Reach router
 // It's important to specify this route as the very last one to prevent overriding all of the other routes
 // CHANGE THE BUILD PATH!
 // app.get('/*', (req, res) => {
 //   res.sendFile(path.join(buildPath, 'index.html'));
 // });
+
+/**** Routes ****/
+const userRoutes = require('./routers/userRoutes')(secret);
+app.use('/', userRoutes);
+
+const suggestionsRoutes = require('./routers/suggestionsRoutes')(suggestionsDb);
+app.use('/', suggestionsRoutes);
 
 /**** Start! ****/
 const url = process.env.MONGO_URL || 'mongodb://localhost/db';
