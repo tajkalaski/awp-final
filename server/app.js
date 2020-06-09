@@ -25,7 +25,9 @@ app.use(express.static(buildPath)); // Serve React from build directory
 // Open paths that do not need login. Any route not included here is protected!
 let openPaths = [
     { url: '/login', methods: ['POST'] },
-    { url: '/register', method: ['POST']}
+    { url: '/register', method: ['POST']},
+    { url: '/api/suggestions', method: ['GET']},
+    { url: '/api/suggestions/:id', method: ['GET']}
 ];
 
 const secret = process.env.SECRET || "i want a cat";
