@@ -35,7 +35,7 @@ const User = require('../userDb');
 
 module.exports = (secret) => {
 
-    router.post('/register', (req, res) => {
+    router.post('/api/register', (req, res) => {
         const { username, password } = req.body 
 
         // const user = User.find((user) => user.username === username);
@@ -71,7 +71,7 @@ module.exports = (secret) => {
         // res.status(501).json({msg: "something went very wrong"});
     });
 
-    router.post('/login', (req, res) => {
+    router.post('/api/login', (req, res) => {
         const { username, password } = req.body;
         console.log(req.body);
     

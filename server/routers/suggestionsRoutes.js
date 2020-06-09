@@ -19,7 +19,7 @@ module.exports = (suggestionsDb) => {
         let suggestion = {
             id: Math.random(),
             text: req.body.suggestionText,
-            signatures: [{ text: String, date: Date }],
+            signatures: [],
         };
     
         const newSuggestion = await suggestionsDb.postSuggestion(suggestion);

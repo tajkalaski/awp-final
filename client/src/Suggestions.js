@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "@reach/router";
+import AddSuggestion from './AddSuggestion';
 
 class Suggestions extends Component {
 
@@ -25,6 +26,7 @@ class Suggestions extends Component {
         return (
             <>
                 <h1>Current Suggestions</h1>
+                <AddSuggestion addSuggestion={(text) => this.props.addSuggestion(text)}></AddSuggestion>
                 <ol style={{ padding: 0, margin: 0}}>
                     {suggestions}
                 </ol>
