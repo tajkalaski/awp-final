@@ -77,7 +77,8 @@ class App extends Component {
             const resp = await this.Auth.login(username, password);
             console.log("Authentication:", resp.msg);
             this.getData();
-            return <Redirect to='/' />
+            alert('You are now logged in.')
+            return <Redirect to="/" />
         } catch (e) {
             console.log("Login", e);
         }

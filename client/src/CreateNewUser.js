@@ -25,11 +25,17 @@ class CreateNewUser extends Component {
         return (
             <>
                 <h3>Register</h3>
-                <input onChange={event => this.handleChange(event)}
-                       name="username" type="text" placeholder="username"></input><br/>
-                <input onChange={event => this.handleChange(event)}
-                       name="password" type="password" placeholder="password"></input><br/>
-                <button onClick={_ => this.handleRegister()}>Register</button>
+                <input
+                    style={{ padding: '8px 16px', border: 'none', borderBottom: '1px solid lightgrey', background: 'none', textAlign: 'center', width: '100px' }} 
+                    onChange={event => this.handleChange(event)}
+                    name="username" type="text" placeholder="username"></input><br/>
+                <input
+                    style={{ padding: '8px 16px', border: 'none', borderBottom: '1px solid lightgrey', background: 'none', textAlign: 'center', width: '100px' }} 
+                    onChange={event => this.handleChange(event)}
+                    name="password" type="password" placeholder="password"></input><br/>
+                <button
+                    style={{ padding: '8px 16px', border: '1px solid pink', background: 'pink', color: 'white', margin: '8px' }} 
+                    onClick={_ => this.handleRegister()}>Register</button>
             </>
         );
     }

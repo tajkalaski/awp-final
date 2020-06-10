@@ -36,7 +36,7 @@ class Login extends Component {
                     name="password" type="password" placeholder="password"></input><br/>
                 <button 
                     style={{ padding: '8px 16px', border: '1px solid pink', background: 'pink', color: 'white', margin: '8px' }}
-                    onClick={_ => this.handleLogin()}>Login</button>
+                    ><Link to='/' onClick={_ => this.handleLogin()}>Login</Link></button>
             </>
         );
     }
