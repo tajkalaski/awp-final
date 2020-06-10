@@ -36,7 +36,6 @@ class Db {
     }
 
     async postSuggestion(newSuggestion) {
-
         let suggestion = new this.suggestionModel(newSuggestion);
         try {
             return suggestion.save();
