@@ -57,6 +57,8 @@ class App extends Component {
             .then(res => {
                 return console.log(res);
             })
+        } else {
+            alert('Your signature does not match your username');
         }
     }
 
