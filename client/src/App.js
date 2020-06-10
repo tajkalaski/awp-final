@@ -42,17 +42,24 @@ class App extends Component {
             'Authorization': 'Bearer ' + this.Auth.getToken()
         }
 
-        // add if text = username; then post it
-        axios.post(`${this.API_URL}/suggestions/${id}/signatures`, 
-        {
-            text: text
-        },
-        {
-            headers: headers
-        })
-        .then(res => {
-            return console.log(res);
-        })
+        if (!username) {
+            alert('You need to be logged in to sign')
+        }
+
+        if (username === text) {
+            axios.post(`${this.API_URL}/suggestions/${id}/signatures`, 
+            {
+                text: text
+            },
+            {
+                headers: headers
+            })
+            .then(res => {
+                return console.log(res);
+            })
+        } else {
+            alert('Your signature does not match your username');
+        }
     }
 
     async addSuggestion(text) {

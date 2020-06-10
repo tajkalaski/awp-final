@@ -14,7 +14,11 @@ class Suggestion extends Component {
 
                     <h3>Signatures</h3>
                     <ul style={{ listStyleType: 'none', padding: 0}}>
-                        {suggestion.signatures.map(signature => 
+                        {suggestion.signatures
+                        .sort(
+                            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+                            )
+                        .map(signature => 
                             <li key={signature._id} style={{ margin: '16px auto', padding: '16px', width: '400px', borderLeft: '4px solid pink', background: 'white'}}>
                                 <div>Signed on: {signature.date}</div>
                                 <div>By: <strong>{signature.text}</strong></div>
