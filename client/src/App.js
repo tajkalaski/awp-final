@@ -56,7 +56,10 @@ class App extends Component {
             })
             .then(res => {
                 return console.log(res);
-            })
+            });
+
+            alert('You have signed the suggestion');
+            this.getData();
         } else {
             alert('Your signature does not match your username');
         }
