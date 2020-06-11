@@ -95,6 +95,7 @@ class App extends Component {
             alert('You are now logged in.')
         } catch (e) {
             console.log("Login", e);
+            alert('Login failed. Please try again!')
         }
     }
 
@@ -102,8 +103,10 @@ class App extends Component {
         try {
             await this.Auth.createNewUser(username, password);
             this.getData();
+            alert('You are now registered. Please proceed to login page.')
         } catch (e) {
             console.log("Register", e);
+            alert('Register failed. Please try again!')
         }
         
     }
@@ -111,6 +114,7 @@ class App extends Component {
     async logout() {
         window.location.reload(false);
         this.Auth.logout();
+        alert('Logout succesfull.')
     }
 
     render() {
