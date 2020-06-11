@@ -60,6 +60,9 @@ class App extends Component {
         } else {
             alert('Your signature does not match your username');
         }
+
+        // change the state to realoaddddd
+        this.getData();
     }
 
     async addSuggestion(text) {
@@ -77,6 +80,8 @@ class App extends Component {
         .then(res => {
             return console.log(res);
         })
+
+        this.getData();
     }
 
     async login(username, password) {
@@ -85,7 +90,6 @@ class App extends Component {
             console.log("Authentication:", resp.msg);
             this.getData();
             alert('You are now logged in.')
-            return <Redirect to="/" />
         } catch (e) {
             console.log("Login", e);
         }
@@ -95,7 +99,6 @@ class App extends Component {
         try {
             await this.Auth.createNewUser(username, password);
             this.getData();
-            return <Redirect to='/login' />
         } catch (e) {
             console.log("Register", e);
         }
