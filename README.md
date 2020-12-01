@@ -1,9 +1,12 @@
-# MERN Heroku Example
+# MERN Heroku App - Suggestion Box
 
-This is a small template for building MERN applications that can be deployed directly to Heroku using git. 
+Advanced Web Programming Final Project. Two days of having fun.
 
-The technology stack is basic MERN but without the database. Basically that means:
+## Check it out online
+[Suggestion Box](https://tajsonik-suggestion-box.herokuapp.com/)
+
+## General Info
+
 * Client is written in React
-* Server is a node.js application using express.js
-
-The application does very little on it's own, but the project demonstrates how you can structure a simple MERN application into a server and a client directory for automating deployment.
+* Server is a Node.js with Express
+* Hosted and deployed on Heroku
